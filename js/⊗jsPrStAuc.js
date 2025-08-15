@@ -66,7 +66,7 @@ elem.addEventListener("input", () => {
   list.innerHTML = "";
 
   // Значение
-  let value = elem.value;
+  let value = elem.value.trim();
 
   // Если поле пустое
   if (!value || value === "") {
@@ -78,10 +78,16 @@ elem.addEventListener("input", () => {
     country.toLocaleLowerCase().startsWith(value.toLocaleLowerCase())
   );
 
+  // Выделение совпаших символов
+
   // Вывод стран
   filteredCountries.forEach((country) => {
+    const matchedText = country.substring(0, elem.value.length);
+    const resText = country.substring(elem.value.length);
+
+    // Создание элемента
     let li = document.createElement("li");
-    li.textContent = country;
+    li.innerHTML = `<span class="matched-text">${matchedText}</span>${resText}`;
     list.appendChild(li);
 
     // Обработка клика по элементу
